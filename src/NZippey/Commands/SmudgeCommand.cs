@@ -35,7 +35,11 @@ public class SmudgeCommand : AsyncCommand<SmudgeCommand.Settings>
 
             do
             {
+#if NET7_0
                 var line = await cin.ReadLineAsync(cancellationToken);
+#else
+                var line = await cin.ReadLineAsync();
+#endif
                 settings.WriteDebug("line: "+line);
                 if (line == null)
                 {
@@ -71,7 +75,11 @@ public class SmudgeCommand : AsyncCommand<SmudgeCommand.Settings>
                 }
                 
                 await zip.WriteAsync(bytes, cancellationToken);
+#if NET7_0
                 await cin.ReadLineAsync(cancellationToken);
+#else
+                await cin.ReadLineAsync();
+#endif
             } while (true);
         }
         finally

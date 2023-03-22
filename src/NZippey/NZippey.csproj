@@ -2,13 +2,44 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>nzippey</ToolCommandName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(ProjectDir)../../README.md" Link="README.md" PackagePath="" Pack="true" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <StartYear>2023</StartYear>
+    <EndYear>$([System.DateTime]::Today.Year)</EndYear>
+    <FullYear Condition="'$(StartYear)'=='$(EndYear)'">$(StartYear)</FullYear>
+    <FullYear Condition="'$(StartYear)'!='$(EndYear)'">$(StartYear)-$(EndYear)</FullYear>
+
+    <!-- Properties related to packaging -->
+    <Authors>Nils Andresen</Authors>
+    <Copyright>Copyright © $(FullYear) — Nils Andresen</Copyright>
+    <Description>Provides a simple git filter tool to deal with zipped files.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/nils-org/NZippey</PackageProjectUrl>
+    <PackageTags>zip;git;filter;tool</PackageTags>
+    <RepositoryUrl>https://github.com/nils-org/NZippey.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>https://github.com/nils-org/NZippey/releases</PackageReleaseNotes>
+    <Version>0.0.1</Version>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2022.3.1" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
     <PackageReference Include="Spectre.Console.Cli" Version="0.46.0" />
   </ItemGroup>
