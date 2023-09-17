@@ -14,8 +14,19 @@ The output will be fully compatible to `zippey` so switching/mixing the two will
 
 ## Usage
 
-TBD
+### add and enable the nzippey filter
 
-## Installation
 
-TBD
+```shell
+# Install the nzippey dotnet tool
+dotnet tool install nzippey
+
+# install the filter(s)
+git config filter.nzippey.smudge "dotnet nzippey smudge"
+git config filter.nzippey.clean "dotnet nzippey clean"
+
+# enable the filters for your file extensions
+"*.myext   filter=nzippey" | Out-File -Append -FilePath .gitattributes -Encoding utf8
+# or if you're not in PowerShell
+# "*.myext   filter=nzippey" >> .gitattributes
+```
